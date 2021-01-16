@@ -15,13 +15,26 @@ if ("geolocation" in navigator){
   console.log('available')
   navigator.geolocation.getCurrentPosition( position => {
     const { latitude, longitude }  = position.coords;
+    let platform = new H.service.Platform({
+      'apikey': ''
+      });
+    let defaultLayers = platform.createDefaultLayers();
+    let map = new H.Map(
+      document.getElementById('mapContainer'),
+      defaultLayers.vector.normal.map,
+      {
+        zoom: 10,
+        center: { lat: latitude, lng: longitude }
+      });
+    const marker = new H.map.Marker({lat: latitude, lng: longitude});
+    map.addObject(marker);
     console.log(latitude, longitude)
   });
-} else{l
+} else{
   console.log('unavailable')
 }
 
-// function init() {
+// function Main() {
 
 //     const base64 = canvas.toDataURL().split(",")[1];
 
