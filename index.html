@@ -2,15 +2,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/addons/p5.dom.min.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <canvas id="canvas" width="300" height="120"></canvas><br>
-    <button id="btnUpload">Upload</button>
-    <p id="demo">location</p>
+    <!-- <canvas id="myCanvas" width="300" height="120"></canvas> -->
+    <!-- <button id="capture">Capture</button><br><br> -->
+    <div style="width: 50vw; height: 50vh" id="mapContainer"></div>
+    <button id="location">location</button>
+    <input type="text" id="Address"><br><br>
+    <!-- <button id="btnUpload">Upload</button>
+    <p id="demo">location</p> -->
 
-    <script src="script.js">
-        
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
