@@ -1,4 +1,5 @@
 let video;
+let address;
 let myCanvas;
 const btnLocation = document.getElementById("location");
 
@@ -43,7 +44,7 @@ function getLocation() {
                 maxresults: 1,
                 prox: latitude + "," + longitude
                 }, data => {
-                    const address = data.Response.View[0].Result[0].Location.Address.Label
+                    address = data.Response.View[0].Result[0].Location.Address.Label
                     document.getElementById("Address").value = address;
                 });
 
