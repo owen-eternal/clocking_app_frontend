@@ -1,15 +1,38 @@
+let video;
+let myCanvas;
 const btnLocation = document.getElementById("location");
 
+function setup() {
 
-btnLocation.addEventListener('click', ()=>{
-    let platform = new H.service.Platform({
-        'apikey': 'MW6aHeGhrIuXS85D7cpKDgJaalCovbPx40nbSWwxJ60'
-        });
+    myCanvas = createCanvas(320,240);
+    background(51);
+    // video = createCapture(VIDEO);
+    // video.size(320,240);
+    const button = createButton('snap');
 
-    let geocoderService = platform.getGeocodingService();
+    //the functions
+    button.mousePressed(takesnap);
+    btnLocation.addEventListener('click', getLocation)
+}
 
+function takesnap() {
+    // const image64 = video.canvas.toDataURL() 
+    image(video, 0, 0);
+    const image64 = myCanvas.canvas.toDataURL();
+    print(image64)
+}
+
+function getLocation() {
+    //get users location
     if (navigator.geolocation) {
 
+        let platform = new H.service.Platform({
+            'apikey': 'MW6aHeGhrIuXS85D7cpKDgJaalCovbPx40nbSWwxJ60'
+            });
+
+        let geocoderService = platform.getGeocodingService();
+
+        //Get coordinates
         navigator.geolocation.getCurrentPosition(position =>{
             const { latitude, longitude } = position.coords
 
@@ -18,7 +41,7 @@ btnLocation.addEventListener('click', ()=>{
                 {
                 mode: "retrieveAddresses",
                 maxresults: 1,
-                prox: -26.2129 + "," + 28.1638
+                prox: latitude + "," + longitude
                 }, data => {
                     const address = data.Response.View[0].Result[0].Location.Address.Label
                     document.getElementById("Address").value = address;
@@ -34,10 +57,14 @@ btnLocation.addEventListener('click', ()=>{
                 });
                 const marker = new H.map.Marker({lat: latitude, lng: longitude});
                 map.addObject(marker);
-        });
+        });   
     } else {
         console.log("not available");
-    }  
-})
+    }    
+}
+
+
+
+
 
 
