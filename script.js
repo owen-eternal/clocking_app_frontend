@@ -27,7 +27,7 @@ function getLocation() {
     if (navigator.geolocation) {
 
         let platform = new H.service.Platform({
-            'apikey': 'MW6aHeGhrIuXS85D7cpKDgJaalCovbPx40nbSWwxJ60'
+            'apikey': ''
             });
 
         let geocoderService = platform.getGeocodingService();
