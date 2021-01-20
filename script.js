@@ -5,14 +5,17 @@ const btnLocation = document.getElementById("location");
 
 function setup() {
 
-    myCanvas = createCanvas(320,240);
+    myCanvas = createCanvas(320, 240);
+    myCanvas.parent("selfie-card")
     background(51);
-    // video = createCapture(VIDEO);
-    // video.size(320,240);
-    const button = createButton('snap');
+    video = createCapture(VIDEO);
+    video.size(320,240);
+    video.parent("camera-mode");
+    const button = document.getElementById('snap');
+
 
     //the functions
-    button.mousePressed(takesnap);
+    button.addEventListener('click',takesnap);
     btnLocation.addEventListener('click', getLocation)
 }
 
@@ -23,12 +26,13 @@ function takesnap() {
     print(image64)
 }
 
+
 function getLocation() {
     //get users location
     if (navigator.geolocation) {
 
         let platform = new H.service.Platform({
-            'apikey': ''
+            'apikey': 'MW6aHeGhrIuXS85D7cpKDgJaalCovbPx40nbSWwxJ60'
             });
 
         let geocoderService = platform.getGeocodingService();
@@ -45,19 +49,20 @@ function getLocation() {
                 prox: latitude + "," + longitude
                 }, data => {
                     address = data.Response.View[0].Result[0].Location.Address.Label
-                    document.getElementById("Address").value = address;
+                    console.log(address)
+                    document.getElementById("address").value = address;
                 });
 
-            //create the map
-            let map = new H.Map(
-                document.getElementById('mapContainer'),
-                platform.createDefaultLayers().vector.normal.map,
-                {
-                zoom: 10,
-                center: { lat: latitude, lng: longitude }
-                });
-                const marker = new H.map.Marker({lat: latitude, lng: longitude});
-                map.addObject(marker);
+            // create the map
+            // let map = new H.Map(
+            //     document.getElementById('mapContainer'),
+            //     platform.createDefaultLayers().vector.normal.map,
+            //     {
+            //     zoom: 10,
+            //     center: { lat: latitude, lng: longitude }
+            //     });
+            //     const marker = new H.map.Marker({lat: latitude, lng: longitude});
+            //     map.addObject(marker);
         });   
     } else {
         console.log("not available");
